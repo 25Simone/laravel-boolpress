@@ -17,7 +17,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">FRONT-OFFICE IN VUE</div>
+    <div id="app"></div>
 
     <script src="{{ asset('js/vue.js') }}"></script>
 </body>
