@@ -25,6 +25,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
+        // $user = Auth::user();
         return view('admin.home');
     }
 }
