@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -14,8 +15,9 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
+        // Save the db data in a variable
         $posts = Post::all();
-
+        // Return the index view
         return view("admin.posts.index", compact('posts'));
     }
 
@@ -46,7 +48,14 @@ class PostController extends Controller
         // Instance a new line
         $newPost = new Post();
         // Fill the line
-        $newPost->fill($data);
+        $newPost->fill($data);   
+        // Define the post's slug
+        $newPost->slug = $this->getUniqueSlag($newPost->title);
+        
+        // Save the line
+        $newPost->save();
+
+        return redirect()->route("admin.posts.index");
     }
 
     /**
@@ -90,7 +99,29 @@ class PostController extends Controller
         //
     }
 
-    protected function getUniqueSlag() {
+    protected function getUniqueSlag($slugString) {
+        // Create the slug using Str class
+        $slug = Str::slug($slugString);
+        
+        // Check at db if there is already an element with the same slug
+        $exists = Post::where("slug", $slug)->first();
+        // Define a counter as an index
+        $counter =  1;
 
+        // If an element with this slug already exists in the db
+        while($exists) {
+            // Create a new slug
+            $newSlug = $slug . "-" . $counter;
+            //Increment the index
+            $counter++;
+
+            // Check at db if there is already an element with the new slug
+            $exists = Post::where("slug", $newSlug)->first();
+            // Set the slug's value
+            if(!$exists) {
+                $slug = $newSlug;
+            }
+        }
+        return $slug;
     }
 }

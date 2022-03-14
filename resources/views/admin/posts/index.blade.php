@@ -6,16 +6,17 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 @foreach ($posts as $post)  
-                    <div class="card">
+                    <div class="card my-3">
                         {{-- CARD HEADER --}}
-                        <div class="card-header">{{ __('Dashboard') }}</div>
+                        <div class="card-header">{{$post->title}}</div>
                         {{-- CARD BODY --}}
                         <div class="card-body">
-                                Card Post {{$post->title}}
-                            </div>
+                            <strong>Content:</strong>
+                            {{ $post->content }}
                         </div>
                     </div>
                 @endforeach
+            </div>    
         </div>
     </div>
 
