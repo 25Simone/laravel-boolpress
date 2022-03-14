@@ -74,8 +74,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
-        //
+    public function edit(Post $post) {
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -85,8 +85,24 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        //
+    public function update(Request $request, Post $post) {
+        // Save and validate the form's data
+        $data = $request->validate(
+           // Validation rules
+           [
+               "title" => "required|min:5",
+               "content" => "required|min:20",
+            ]
+        );
+
+        if ($data["title"] !== $post->title) {
+            $data["slug"] = $this->getUniqueSlag($data["title"]);  
+        }
+
+        // Update the post
+        $post->update($data);
+
+        return redirect()->route("admin.posts.index");
     }
 
     /**
