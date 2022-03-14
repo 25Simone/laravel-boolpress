@@ -15,6 +15,12 @@
                 <strong>Content:</strong>
                 {{ $post->content }}
             </div>
+            <div class="d-flex justify-content-center p-3">
+                @include('partials.deleteButton', [
+                    "route"=>"admin.posts.destroy",
+                    "id"=>$post->id,
+                ])
+            </div>
         </div>
       </div>
     </div>
