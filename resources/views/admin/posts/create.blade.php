@@ -32,6 +32,17 @@
                                 @enderror
                             </div>
 
+                            {{-- SELECT CATEGORY --}}
+                            <div class="py-3">
+                                <label>Category</label>
+                                <select name="category_id" class="form-select" id="category_id">
+                                    <option value="">-- Nessuna categoria --</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="form-group">
                                 <a href="{{ route('admin.posts.index') }}" class="btn btn-outline-secondary">Annulla</a>
                                 <button type="submit" class="btn btn-success">Save</button>

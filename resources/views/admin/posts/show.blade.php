@@ -22,6 +22,8 @@
                   <strong>Data di creazione: </strong>{{ $post->created_at }}
                   <br />
                   <strong>Ultima modifica: </strong>{{ $post->updated_at }}
+                  <br />
+                  <strong>Categoria: </strong>{{ $post->category->name }}
                 </div>
             </div>
             <div class="d-flex justify-content-center p-3">
