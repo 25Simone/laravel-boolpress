@@ -53,7 +53,7 @@ class PostController extends Controller
         // Define the post's slug
         $newPost->slug = $this->getUniqueSlug($newPost->title);
         
-        // define the user_id value as the id of the logged in user
+        // Define the user_id value as the id of the logged in user
         $newPost->user_id = Auth::user()->id;
 
         // Save the line
