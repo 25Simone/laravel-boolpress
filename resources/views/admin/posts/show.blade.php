@@ -23,7 +23,10 @@
                   <br />
                   <strong>Ultima modifica: </strong>{{ $post->updated_at }}
                   <br />
-                  <strong>Categoria: </strong>{{ $post->category->name }}
+                  <strong>Categoria: </strong> 
+                  @if (isset($post->category)) 
+                    {{ $post->category->name }}
+                  @endif
                 </div>
             </div>
             <div class="d-flex justify-content-center p-3">

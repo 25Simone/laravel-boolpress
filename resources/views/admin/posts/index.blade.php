@@ -20,8 +20,8 @@
                         </div>
                         {{-- CARD BODY --}}
                         <div class="card-body">
-                            <strong>Content:</strong>
-                            {{ $post->content }}
+                            <div><strong>Content:</strong> {{ $post->content }}</div>
+                            <div>{{ $post->user->name }}; {{ $post->updated_at }}</div>
                         </div>
                     </div>
                 @endforeach

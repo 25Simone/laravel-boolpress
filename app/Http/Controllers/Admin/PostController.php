@@ -77,7 +77,6 @@ class PostController extends Controller
         $post = Post::where("slug", $slug)->first();
 
         return view("admin.posts.show", compact("post"));
-        // return view('admin.posts.show', compact('post'));
     }
 
     /**
