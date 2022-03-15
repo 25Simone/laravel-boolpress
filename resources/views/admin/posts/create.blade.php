@@ -33,7 +33,7 @@
                             </div>
 
                             <div class="form-group">
-                                <a href="{{ route('admin.posts.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                                <a href="{{ route('admin.posts.index') }}" class="btn btn-outline-secondary">Annulla</a>
                                 <button type="submit" class="btn btn-success">Save</button>
                             </div>
                         </form>

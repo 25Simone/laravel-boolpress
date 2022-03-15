@@ -6,6 +6,7 @@ use App\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -50,8 +51,11 @@ class PostController extends Controller
         // Fill the line
         $newPost->fill($data);   
         // Define the post's slug
-        $newPost->slug = $this->getUniqueSlag($newPost->title);
+        $newPost->slug = $this->getUniqueSlug($newPost->title);
         
+        // define the user_id value as the id of the logged in user
+        $newPost->user_id = Auth::user()->id;
+
         // Save the line
         $newPost->save();
 

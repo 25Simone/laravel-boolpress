@@ -6,16 +6,26 @@
       <div class="col-md-8">
         <div class="card">
             <div class="card-header d-flex align-items-center">
-                <h3>
-                    Dettagli post: {{ $post->title }}
-                </h3>
+                <div>
+                    Dettagli post: <strong>{{ $post->title }}</strong>
+                </div>
             </div>
   
             <div class="card-body">
                 <strong>Content:</strong>
                 {{ $post->content }}
+                <div>
+                  <strong>Utente: </strong>{{ $post->user->name }}
+                  <br />
+                  <strong>Email: </strong>{{ $post->user->email }}
+                  <br />
+                  <strong>Data di creazione: </strong>{{ $post->created_at }}
+                  <br />
+                  <strong>Ultima modifica: </strong>{{ $post->updated_at }}
+                </div>
             </div>
             <div class="d-flex justify-content-center p-3">
+                <a class="btn btn-outline-secondary mx-2" href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>
                 @include('partials.deleteButton', [
                     "route"=>"admin.posts.destroy",
                     "id"=>$post->id,

@@ -13,7 +13,7 @@
                         {{-- CARD HEADER --}}
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <div>{{$post->title}}</div>
-                            <div class="d-flex flex-column">
+                            <div class="d-flex">
                                 <a class="nav-link" href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>
                                 <a class="nav-link" href="{{ route('admin.posts.show', $post->slug) }}">Dettagli</a>
                             </div>

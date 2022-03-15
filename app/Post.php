@@ -10,4 +10,9 @@ class Post extends Model {
         "content",
         "slug",
     ];
+
+    // expresses the dependence of Post towards User
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
 }
