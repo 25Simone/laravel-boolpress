@@ -21,8 +21,13 @@
                         {{-- CARD BODY --}}
                         <div class="card-body">
                             <div><strong>Content:</strong> {{ $post->content }}</div>
-                            <div>{{ $post->user->name }}; {{ $post->updated_at }}</div>
-                        </div>
+                            <div>
+                                {{ $post->user->name }} - 
+                                @if(isset($post->category->name))
+                                    {{ $post->category->name }}
+                                @endif; 
+                                {{ $post->updated_at }}</div>
+                            </div>
                     </div>
                 @endforeach
             </div>    

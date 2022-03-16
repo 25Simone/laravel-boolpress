@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Tag;
 use App\Category;
 use App\Post;
 use App\Http\Controllers\Controller;
@@ -9,8 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 
-class PostController extends Controller
-{
+class PostController extends Controller {
     /**
      * Display a listing of the resource.
      *
@@ -31,8 +31,10 @@ class PostController extends Controller
     public function create() {
         // Import the categories
         $categories = Category::all();
+        // Import the tags
+        $tags = Tag::all();
 
-        return view('admin.posts.create', compact('categories'));
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -49,6 +51,7 @@ class PostController extends Controller
                 "title" => "required|min:5",
                 "content" => "required|min:20",
                 "category_id" => "nullable",
+                "tags" => "nullable"
             ]
         );
         // Instance a new line
@@ -57,12 +60,14 @@ class PostController extends Controller
         $newPost->fill($data);   
         // Define the post's slug
         $newPost->slug = $this->getUniqueSlug($newPost->title);
-        
         // Define the user_id value as the id of the logged in user
         $newPost->user_id = Auth::user()->id;
 
         // Save the line
         $newPost->save();
+        
+        // For the current post adds the relations with the tags taken from the form
+        $newPost->tags()->attach($data["tags"]);
 
         return redirect()->route("admin.posts.index");
     }
@@ -88,10 +93,13 @@ class PostController extends Controller
     public function edit(Post $post) {
         // Import the categories
         $categories = Category::all();
+        // Import the tags
+        $tags = Tag::all();
 
         return view('admin.posts.edit', [
             "post"=>$post,
             "categories"=>$categories,
+            "tags"=>$tags
         ]);
     }
 
@@ -109,7 +117,8 @@ class PostController extends Controller
            [
                "title" => "required|min:5",
                "content" => "required|min:20",
-               "category_id" => "nullable",
+               "category_id" => "nullable|exists:categories,id",
+               "tags" => "nullable|exists:tags,id",
             ]
         );
 
@@ -119,6 +128,18 @@ class PostController extends Controller
 
         // Update the post
         $post->update($data);
+
+        
+        if (key_exists('tags', $data)) {
+
+            // Update the pivot table post_tag
+            // Invokes the tags function (in the post's model)
+            // For the current post remove all the existing relations with the tags
+            $post->tags()->detach();
+            
+            // For the current post adds the relations with the tags taken from the form
+            $post->tags()->attach($data["tags"]);
+        }
 
         return redirect()->route("admin.posts.show", $post->slug);
     }

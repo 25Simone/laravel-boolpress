@@ -39,9 +39,26 @@
                                 <select name="category_id" class="form-select" id="category_id">
                                     <option value="">-- Nessuna categoria --</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        <option value="{{ $category->id }}" {{ $post->category_id === $category->id ? 'selected' : ''}}>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+
+                            {{-- SELECT TAG --}}
+                            <div class="py-3">
+                                <label>Tags</label>
+                                <br>
+                                @foreach ($tags as $tag)
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="tag_{{ $tag->id }}" value="{{ $tag->id }}"
+                                        name="tags[]" {{ $post->tags->contains($tag) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="tag_{{ $tag->id }}">{{ Ucwords($tag->name) }}</label>
+                                    </div>
+                                @endforeach
+
+                                @error('tags')
+                                    <div class="text-red">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
