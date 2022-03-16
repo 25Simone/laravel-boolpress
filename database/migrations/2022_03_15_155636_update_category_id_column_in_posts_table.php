@@ -13,9 +13,9 @@ class UpdateCategoryIdColumnInPostsTable extends Migration
      */
     public function up() {
         Schema::table('posts', function (Blueprint $table) {
-            $table->foreign("category_id") // the user_id column
+            $table->foreign("category_id") // the category_id column
                   ->references("id") // refers to the id column
-                  ->on("posts"); // of the users table
+                  ->on("categories"); // of the categories table
         });
     }
 

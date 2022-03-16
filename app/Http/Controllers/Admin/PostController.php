@@ -113,22 +113,24 @@ class PostController extends Controller {
     public function update(Request $request, Post $post) {
         // Save and validate the form's data
         $data = $request->validate(
-           // Validation rules
-           [
-               "title" => "required|min:5",
-               "content" => "required|min:20",
-               "category_id" => "nullable|exists:categories,id",
-               "tags" => "nullable|exists:tags,id",
-            ]
-        );
-
-        if ($data["title"] !== $post->title) {
-            $data["slug"] = $this->getUniqueSlug($data["title"]);  
-        }
-
-        // Update the post
-        $post->update($data);
-
+            // Validation rules
+            [
+                "title" => "required|min:5",
+                "content" => "required|min:20",
+                "category_id" => "nullable|exists:categories,id",
+                "tags" => "nullable|exists:tags,id",
+                ]
+            );
+            
+            
+            if ($data["title"] !== $post->title) {
+                $data["slug"] = $this->getUniqueSlug($data["title"]);  
+            }
+            
+            // dd($post);
+            // Update the post
+            $post->update($data);
+            
         
         if (key_exists('tags', $data)) {
 
@@ -136,7 +138,7 @@ class PostController extends Controller {
             // Invokes the tags function (in the post's model)
             // For the current post remove all the existing relations with the tags
             $post->tags()->detach();
-            
+
             // For the current post adds the relations with the tags taken from the form
             $post->tags()->attach($data["tags"]);
         }
