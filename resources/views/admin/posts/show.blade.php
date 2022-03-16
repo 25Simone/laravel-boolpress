@@ -26,7 +26,14 @@
                   <strong>Categoria: </strong> 
                   @if (isset($post->category)) 
                     {{ $post->category->name }}
+                    @else
+                    <span>Nessuna categoria</span>
                   @endif
+                  <br />
+                  <strong>Tags: </strong>
+                  @foreach ($post->tags as $tag)
+                    <span> {{$tag->name}}, </span>                
+                  @endforeach
                 </div>
             </div>
             <div class="d-flex justify-content-center p-3">
