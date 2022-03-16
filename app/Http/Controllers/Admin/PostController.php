@@ -18,7 +18,7 @@ class PostController extends Controller {
      */
     public function index() {
         // Save the db data in a variable
-        $posts = Post::all();
+        $posts = Post::where('user_id', Auth::user()->id)->get();
         // Return the index view
         return view("admin.posts.index", compact('posts'));
     }
