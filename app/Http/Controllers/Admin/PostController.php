@@ -50,6 +50,7 @@ class PostController extends Controller {
             [
                 "title" => "required|min:5",
                 "content" => "required|min:20",
+                "image" => "nullable|url",
                 "category_id" => "nullable",
                 "tags" => "nullable"
             ]
@@ -119,6 +120,7 @@ class PostController extends Controller {
             [
                 "title" => "required|min:5",
                 "content" => "required|min:20",
+                "image" => "nullable|url",
                 "category_id" => "nullable|exists:categories,id",
                 "tags" => "nullable|exists:tags,id",
                 ]

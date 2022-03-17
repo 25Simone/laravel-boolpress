@@ -32,6 +32,15 @@
                                 @enderror
                             </div>
 
+                            {{-- IMAGE --}}
+                            <div class="py-3">
+                                <label>Image</label>
+                                <input type="url" name="image" class="form-control @error('image') is-invalid @enderror" placeholder="Enter the url" value="{{ old('image') }}">
+                                @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
                             {{-- SELECT CATEGORY --}}
                             <div class="py-3">
                                 <label>Category</label>

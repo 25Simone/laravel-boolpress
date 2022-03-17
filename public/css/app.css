@@ -19950,3 +19950,13 @@ fieldset:disabled .btn {
   }
 }
 
+.post-image {
+  max-width: 100%;
+  padding: 15px;
+}
+
+.post-image img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
