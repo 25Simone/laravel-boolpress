@@ -13,9 +13,9 @@
                         {{-- CARD HEADER --}}
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <div>{{$post->title}}</div>
-                            <div class="d-flex">
-                                <a class="nav-link" href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>
-                                <a class="nav-link" href="{{ route('admin.posts.show', $post->slug) }}">Dettagli</a>
+                            <div class="d-flex fs-6">
+                                <a class="nav-link" href="{{ route('admin.posts.edit', $post->id) }}" title="edit"><i class="fas fa-edit"></i></a>
+                                <a class="nav-link" href="{{ route('admin.posts.show', $post->slug) }}" title="details"><i class="fas fa-eye"></i></a>
                             </div>
                         </div>
                         {{-- CARD BODY --}}
@@ -26,8 +26,13 @@
                                 @if(isset($post->category->name))
                                     {{ $post->category->name }}
                                 @endif; 
-                                {{ $post->updated_at }}</div>
+                                @if($post->updated_at->diffInHours(date(0)) < 12)
+                                    {{ $post->updated_at->diffForHumans(date(0)) }}
+                                    @else
+                                    {{$post->updated_at->format("d-m-Y")}}
+                                @endif
                             </div>
+                        </div>
                     </div>
                 @endforeach
             </div>    

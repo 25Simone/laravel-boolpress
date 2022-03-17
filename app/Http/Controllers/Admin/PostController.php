@@ -67,7 +67,9 @@ class PostController extends Controller {
         $newPost->save();
         
         // For the current post adds the relations with the tags taken from the form
-        $newPost->tags()->attach($data["tags"]);
+        if (key_exists("tags", $data)) {
+            $newPost->tags()->attach($data["tags"]);
+        }
 
         return redirect()->route("admin.posts.index");
     }
@@ -133,7 +135,6 @@ class PostController extends Controller {
             
         
         if (key_exists('tags', $data)) {
-
             // Update the pivot table post_tag
             // Invokes the tags function (in the post's model)
             // For the current post remove all the existing relations with the tags
@@ -141,6 +142,8 @@ class PostController extends Controller {
 
             // For the current post adds the relations with the tags taken from the form
             $post->tags()->attach($data["tags"]);
+        } else {
+            $post->tags()->detach();
         }
 
         return redirect()->route("admin.posts.show", $post->slug);
@@ -153,6 +156,8 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post) {
+        $post->tags()->detach();
+
         $post->delete();
 
         return redirect()->route('admin.posts.index');

@@ -19,9 +19,9 @@
                   <br />
                   <strong>Email: </strong>{{ $post->user->email }}
                   <br />
-                  <strong>Data di creazione: </strong>{{ $post->created_at }}
+                  <strong>Data di creazione: </strong>{{ $post->created_at->format("d-m-Y") }}
                   <br />
-                  <strong>Ultima modifica: </strong>{{ $post->updated_at }}
+                  <strong>Ultima modifica: </strong>{{ $post->updated_at }} ({{ $post->updated_at->diffForHumans(date(0)) }})
                   <br />
                   <strong>Categoria: </strong> 
                   @if (isset($post->category)) 
@@ -31,9 +31,11 @@
                   @endif
                   <br />
                   <strong>Tags: </strong>
-                  @foreach ($post->tags as $tag)
-                    <span> {{$tag->name}}, </span>                
-                  @endforeach
+                  @forelse ($post->tags as $tag)
+                    <span> {{$tag->name}}, </span>
+                    @empty
+                    <span>Nessun Tag Inserito</span>              
+                  @endforelse
                 </div>
             </div>
             <div class="d-flex justify-content-center p-3">
