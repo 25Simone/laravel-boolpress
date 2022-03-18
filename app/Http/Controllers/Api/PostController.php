@@ -14,10 +14,7 @@ class PostController extends Controller {
         // Save the posts data in a variable
         $posts = Post::all();
         // Return in json the posts data
-        return response()->json([
-            "successfully" => true,
-            "data" => $posts,
-        ]);
+        return response()->json($posts);
     }
 
     public function store(Request $request) {
@@ -52,7 +49,7 @@ class PostController extends Controller {
 
     public function show(Post $post) {
         // Pass the dependent functions to the show
-        $post->load("tags", "users");
+        $post->load("tags", "user");
         // Return the post
         return response()->json($post);
     }
