@@ -1,52 +1,41 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container">
+<div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header d-flex">
-            {{-- <a href="{{ route('admin.users.index') }}" class="me-2">
-              <i class="fas fa-chevron-left"></i>
-            </a>
-
-            <a class="ms-auto" href="{{ route('admin.users.edit', $user->id) }}">
-              <i class="fas fa-edit"></i>
-            </a> --}}
-          </div>
-
-          <div class="card-body">
-            <div class="row">
-              <div class="col-3 text-center">
-                <img
-                  src="{{ $user->infoUser->avatar ?? 'https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Clipart.png' }}"
-                  class="rounded-circle w-75">
-              </div>
-              <div class="col">
-
-                <h4>{{ $user->name }}</h4>
-                <h5>{{ $user->email }}</h5>
-
-                @if ($user->infoUser)
-                  <div>{{ $user->infoUser->address }}</div>
-                  <div>{{ $user->infoUser->phone }}</div>
-                @endif
-              </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header d-flex align-items-center">
+                    <div>
+                        <strong>{{ $user->name }}</strong>
+                    </div>
+                </div>
+      
+                <div class="card-body d-flex align-items-center justify-content-around">
+                    <div class="user-avatar">
+                        @if(isset($user->infoUser->avatar))
+                            <img class="img-fluid rounded-circle" src="{{ $user->infoUser->avatar }}" alt="post image">
+                        @endif
+                    </div>
+                    <div>
+                        @if($user->infoUser)
+                            <strong>Email: </strong>{{ $user->email }}
+                            <br />
+                            <strong>Phone: </strong>{{ $user->infoUser->phone }}
+                            <br />
+                            <strong>Address: </strong>{{ $user->infoUser->address }}
+                        @endif
+                    </div>
+                </div>
+                {{-- <div class="d-flex justify-content-center p-3">
+                    <a class="btn btn-outline-secondary mx-2" href="{{ route('admin.users.edit', $user->id) }}">Modifica</a>
+                    @include('partials.deleteButton', [
+                        "route"=>"admin.users.destroy",
+                        "id"=>$user->id,
+                    ])
+                </div> --}}
             </div>
-
-            <div class="d-flex align-items-center">
-
-            </div>
-
-            <p class="lead">
-
-            </p>
-
-
-
-          </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 @endsection

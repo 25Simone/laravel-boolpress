@@ -19960,3 +19960,12 @@ fieldset:disabled .btn {
      object-fit: cover;
 }
 
+.user-avatar {
+  width: 100px;
+}
+
+.user-avatar img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
