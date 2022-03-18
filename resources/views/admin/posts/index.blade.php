@@ -26,7 +26,7 @@
                                 @if(isset($post->category->name))
                                     {{ $post->category->name }}
                                 @endif; 
-                                @if($post->updated_at->diffInHours(date(0)) < 12)
+                                @if($post->updated_at->diffInHours(date(0)) <= 12)
                                     {{ $post->updated_at->diffForHumans(date(0)) }}
                                     @else
                                     {{$post->updated_at->format("d-m-Y")}}

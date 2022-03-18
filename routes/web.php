@@ -26,6 +26,7 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource("posts", "PostController");
+        Route::get('users/show', 'UserController@show')->name('users.show');
     });
 
     Route::get("{any?}", function() {

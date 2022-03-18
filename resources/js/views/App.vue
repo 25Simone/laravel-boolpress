@@ -8,9 +8,17 @@
 <script>
 import TheNavbar from "../components/TheNavbar.vue";
 export default {
-  components: {
+    components: {
       TheNavbar
     },
+    data() {
+        return {
+
+        }
+    },
+    mounted() {
+
+    }
     
 }
 </script>
