@@ -12,7 +12,7 @@ class PostController extends Controller {
 
     public function index() {
         // Save the posts data in a variable
-        $posts = Post::paginate(5);
+        $posts = Post::paginate(6);
         // Load the user data
         $posts->load('user', 'category');
         // Return in json the posts data

@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="/">Laravel Boolpress</a>
+            <a class="navbar-brand fs-2" href="/">Laravel Boolpress</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-bs-controls="navbarSupportedContent" aria-bs-expanded="false" >
                 <span class="navbar-toggler-icon"></span>

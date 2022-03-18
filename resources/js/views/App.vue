@@ -1,8 +1,8 @@
 <template>
     <div>
         <!-- Navbar -->
-        <the-navbar></the-navbar>
-        <h1>Pagina in vue.js</h1>
+        <the-navbar class="bg-dark navbar-dark"></the-navbar>
+        <h1 class="text-center title py-3 fw-bold">POSTS</h1>
         <!-- Main -->
         <main class="container py-4">
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -15,23 +15,26 @@
                 </the-post-card>
             </div>
 
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link text-dark" @click="fetchPosts(pagination.current_page - 1)">Previous</a>
-                    </li>
-                    <li
-                    class="page-item"
-                    v-for="page in pagination.last_page"
-                    :key="page"
-                    >
-                        <a class="page-link" @click="fetchPosts(page)">{{ page }}</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link text-dark" @click="fetchPosts(pagination.current_page + 1)">Next</a>
-                    </li>
-                </ul>
-            </nav>
+            <div class="d-flex justify-content-center container-fluid py-5">
+                <the-pagination-controller @previousPage="previousPage" @nextPage="nextPage" @getPage="getPage" :pagination="pagination"></the-pagination-controller>
+                <!-- <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item mx-2">
+                            <a class="page-link text-dark" @click="fetchPosts(pagination.current_page - 1)">Previous</a>
+                        </li>
+                        <li
+                        class="page-item"
+                        v-for="page in pagination.last_page"
+                        :key="page"
+                        >
+                            <a class="page-link" @click="fetchPosts(page)">{{ page }}</a>
+                        </li>
+                        <li class="page-item mx-2">
+                            <a class="page-link text-dark" @click="fetchPosts(pagination.current_page + 1)">Next</a>
+                        </li>
+                    </ul>
+                </nav> -->
+            </div>
         </main>
     </div>
 </template>
@@ -40,6 +43,7 @@
 // Components
 import TheNavbar from "../components/TheNavbar.vue";
 import ThePostCard from "../components/ThePostCard.vue";
+import ThePaginationController from '../components/ThePaginationController.vue';
 // Axios
 import axios from 'axios';
 
@@ -47,6 +51,7 @@ export default {
     components: {
       TheNavbar,
       ThePostCard,
+      ThePaginationController,
     },
     data() {
         return {
@@ -78,11 +83,22 @@ export default {
             // Save only the posts data
             this.posts = resp.data.data;
         },
+        previousPage() {
+            this.fetchPosts(this.pagination.current_page - 1);
+            console.log('previousPage eseguita');
+        },
+        nextPage() {
+            this.fetchPosts(this.pagination.current_page + 1);
+            console.log('nextPage eseguita');
+        },
+        getPage(page) {
+            this.fetchPosts(page);
+            console.log('getPage eseguita');
+        },
     }
     
 }
 </script>
 
-<style lang="sss" scoped>
-
+<style lang="scss" scoped>
 </style>
