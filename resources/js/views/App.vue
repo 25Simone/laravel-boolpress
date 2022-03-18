@@ -39,10 +39,13 @@ export default {
         this.fetchPosts();
     },
     methods: {
-        fetchPosts() {
-            axios.get("/api/posts").then((resp) => {
-                this.posts = resp.data;
-            })
+        async fetchPosts() {
+            // axios.get("/api/posts").then((resp) => {
+            //     this.posts = resp.data;
+            // })
+            // fetch posts using async await
+            const resp = await axios.get("/api/posts");
+            this.posts = resp.data;
         },
     }
     

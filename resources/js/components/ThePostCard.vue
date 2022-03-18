@@ -5,6 +5,20 @@
             <div class="card-body">
                 <h5 class="card-title">{{ post.title }}</h5>
                 <p class="card-text" v-html="post.content"></p>
+                <div>
+                    <span> <strong>Autore: </strong> {{ post.user.name }} </span>
+                    <br />
+                    <span> <strong>Data: </strong> {{ post.created_at }} </span>
+                    <br />
+                    <span>
+                        <strong>Category: </strong>
+                        <em v-if="post.category">{{ post.category.name }}</em>
+                        <em v-else>Nessuna categoria</em>
+                    </span>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="">Dettagli</a>
             </div>
         </div>
     </div>    

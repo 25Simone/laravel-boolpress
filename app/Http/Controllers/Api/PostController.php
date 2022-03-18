@@ -13,6 +13,8 @@ class PostController extends Controller {
     public function index() {
         // Save the posts data in a variable
         $posts = Post::all();
+        // Load the user data
+        $posts->load('user', 'category');
         // Return in json the posts data
         return response()->json($posts);
     }
