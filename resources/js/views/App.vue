@@ -14,6 +14,24 @@
                 >
                 </the-post-card>
             </div>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link text-dark" @click="fetchPosts(pagination.current_page - 1)">Previous</a>
+                    </li>
+                    <li
+                    class="page-item"
+                    v-for="page in pagination.last_page"
+                    :key="page"
+                    >
+                        <a class="page-link" @click="fetchPosts(page)">{{ page }}</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-dark" @click="fetchPosts(pagination.current_page + 1)">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </main>
     </div>
 </template>
@@ -33,19 +51,32 @@ export default {
     data() {
         return {
             posts: [],
+            // Pagination
+            pagination: {},
         }
     },
     mounted() {
         this.fetchPosts();
     },
     methods: {
-        async fetchPosts() {
+        async fetchPosts(page = 1) {
             // axios.get("/api/posts").then((resp) => {
             //     this.posts = resp.data;
             // })
+
+            if (page < 1) {
+                page = 1;
+            };
+            if (page > this.pagination.last_page) {
+                page = this.pagination.last_page;
+            };
+
             // fetch posts using async await
-            const resp = await axios.get("/api/posts");
-            this.posts = resp.data;
+            const resp = await axios.get("/api/posts?page=" + page);
+            // Save the response in a variable
+            this.pagination = resp.data;
+            // Save only the posts data
+            this.posts = resp.data.data;
         },
     }
     
