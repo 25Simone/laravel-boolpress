@@ -27,13 +27,13 @@
                         @endif
                     </div>
                 </div>
-                {{-- <div class="d-flex justify-content-center p-3">
+                <div class="d-flex justify-content-center p-3">
                     <a class="btn btn-outline-secondary mx-2" href="{{ route('admin.users.edit', $user->id) }}">Modifica</a>
-                    @include('partials.deleteButton', [
+                    {{-- @include('partials.deleteButton', [
                         "route"=>"admin.users.destroy",
                         "id"=>$user->id,
-                    ])
-                </div> --}}
+                    ]) --}}
+                </div>
             </div>
         </div>
     </div>
