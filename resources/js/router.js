@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "./pages/Home";
 import Contacts from "./pages/Contacts";
+import Show from "./pages/posts/Show";
 
 Vue.use(VueRouter);
 
@@ -19,6 +20,12 @@ const router = new VueRouter({
             component: Contacts,
             name:"contacts.index",
             meta: {title: "Boolpress | Contacts", linkTxt: "Contatti",},
+        },
+        {
+            path: "/posts/:post",
+            component: Show,
+            name:"posts.show",
+            meta: {title: "Dettagli"},
         },
     ]
 });
