@@ -8,7 +8,7 @@
                 <div>
                     <span> <strong>Autore: </strong> {{ post.user.name }} </span>
                     <br />
-                    <span> <strong>Data: </strong> {{ post.created_at }} </span>
+                    <span> <strong>Data: </strong> {{ getCreationDate(post) }} </span>
                     <br />
                     <span>
                         <strong>Category: </strong>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 export default {
     props: {
         post: Object,
@@ -32,8 +33,15 @@ export default {
     methods: {
         getPostImage(post) {
             return post.image ?? 'http://www.asdalcione.it/wp-content/uploads/2016/08/jk-placeholder-image-1.jpg';
+        },
+        getCreationDate(post) {
+            if(moment().diff(post.created_at, 'hours') >= 12){
+                return moment(post.created_at).format('DD/MM/YYYY [-] HH:mm');
+            } else {
+                return moment(post.created_at).fromNow()
+            }
         }
-    }
+    },
 }
 </script>
 
