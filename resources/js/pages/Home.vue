@@ -1,5 +1,7 @@
 <template>
     <div>
+        <!-- Title -->
+        <h1 class="text-center title py-3 fw-bold">POSTS</h1>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <!-- Card -->
             <the-post-card v-for="post in posts" :key="post.id" :post="post"></the-post-card>

@@ -8,9 +8,25 @@ Vue.use(VueRouter);
 const router = new VueRouter({
     mode: "history",
     routes: [
-        {path: "/", component: Home, name:"home.index"},
-        {path: "/contacts", component: Contacts, name:"contacts.index"},
+        {
+            path: "//",
+            component: Home,
+            name:"home.index",
+            meta: {title: "Boolpress | Homepage", linkTxt: "Home",},
+        },
+        {
+            path: "/contacts",
+            component: Contacts,
+            name:"contacts.index",
+            meta: {title: "Boolpress | Contacts", linkTxt: "Contatti",},
+        },
     ]
+});
+
+// Change the page title before loading each route
+router.beforeEach((to, from, next) => {
+    document.title = to.meta.title;
+    next()
 });
 
 // Export th einstance (make it public)

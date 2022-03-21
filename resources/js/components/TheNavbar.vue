@@ -13,6 +13,14 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
+                    <!-- Dynamic route links -->
+                    <li
+                    class="nav-item"
+                    v-for="route in routes"
+                    :key="route.path"
+                    >
+                        <router-link class="nav-link" :to="route.path" > {{ route.meta.linkTxt }} </router-link>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/login"> Login </a>
                     </li>
@@ -27,7 +35,14 @@
 
 <script>
 export default {
-    
+    data() {
+        return {
+           routes: [], 
+        }
+    },
+    mounted() {
+        this.routes = this.$router.getRoutes().filter((route) => route.meta.linkTxt);
+    }
 }
 </script>
 

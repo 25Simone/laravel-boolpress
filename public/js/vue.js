@@ -1947,7 +1947,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      routes: []
+    };
+  },
+  mounted: function mounted() {
+    this.routes = this.$router.getRoutes().filter(function (route) {
+      return route.meta.linkTxt;
+    });
+  }
+});
 
 /***/ }),
 
@@ -2107,6 +2126,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
  // Axios
 
@@ -2199,7 +2220,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_TheNavbar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/TheNavbar.vue */ "./resources/js/components/TheNavbar.vue");
-//
 //
 //
 //
@@ -25685,7 +25705,56 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "nav",
+    { staticClass: "navbar navbar-expand-md navbar-light bg-light shadow-sm" },
+    [
+      _c("div", { staticClass: "container" }, [
+        _c("a", { staticClass: "navbar-brand fs-2", attrs: { href: "/" } }, [
+          _vm._v("Laravel Boolpress"),
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "collapse navbar-collapse",
+            attrs: { id: "navbarSupportedContent" },
+          },
+          [
+            _c("ul", { staticClass: "navbar-nav ms-auto" }),
+            _vm._v(" "),
+            _c(
+              "ul",
+              { staticClass: "navbar-nav ml-auto" },
+              [
+                _vm._l(_vm.routes, function (route) {
+                  return _c(
+                    "li",
+                    { key: route.path, staticClass: "nav-item" },
+                    [
+                      _c(
+                        "router-link",
+                        { staticClass: "nav-link", attrs: { to: route.path } },
+                        [_vm._v(" " + _vm._s(route.meta.linkTxt) + " ")]
+                      ),
+                    ],
+                    1
+                  )
+                }),
+                _vm._v(" "),
+                _vm._m(1),
+                _vm._v(" "),
+                _vm._m(2),
+              ],
+              2
+            ),
+          ]
+        ),
+      ]),
+    ]
+  )
 }
 var staticRenderFns = [
   function () {
@@ -25693,62 +25762,39 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "nav",
+      "button",
       {
-        staticClass: "navbar navbar-expand-md navbar-light bg-light shadow-sm",
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-bs-toggle": "collapse",
+          "data-bs-target": "#navbarSupportedContent",
+          "aria-bs-controls": "navbarSupportedContent",
+          "aria-bs-expanded": "false",
+        },
       },
-      [
-        _c("div", { staticClass: "container" }, [
-          _c("a", { staticClass: "navbar-brand fs-2", attrs: { href: "/" } }, [
-            _vm._v("Laravel Boolpress"),
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "navbar-toggler",
-              attrs: {
-                type: "button",
-                "data-bs-toggle": "collapse",
-                "data-bs-target": "#navbarSupportedContent",
-                "aria-bs-controls": "navbarSupportedContent",
-                "aria-bs-expanded": "false",
-              },
-            },
-            [_c("span", { staticClass: "navbar-toggler-icon" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "collapse navbar-collapse",
-              attrs: { id: "navbarSupportedContent" },
-            },
-            [
-              _c("ul", { staticClass: "navbar-nav ms-auto" }),
-              _vm._v(" "),
-              _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-                _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    { staticClass: "nav-link", attrs: { href: "/login" } },
-                    [_vm._v(" Login ")]
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    { staticClass: "nav-link", attrs: { href: "/register" } },
-                    [_vm._v(" Register ")]
-                  ),
-                ]),
-              ]),
-            ]
-          ),
-        ]),
-      ]
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
     )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "/login" } }, [
+        _vm._v(" Login "),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "/register" } }, [
+        _vm._v(" Register "),
+      ]),
+    ])
   },
 ]
 render._withStripped = true
@@ -25962,6 +26008,10 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("h1", { staticClass: "text-center title py-3 fw-bold" }, [
+      _vm._v("POSTS"),
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" },
@@ -26014,10 +26064,6 @@ var render = function () {
     "div",
     [
       _c("the-navbar", { staticClass: "bg-dark navbar-dark" }),
-      _vm._v(" "),
-      _c("h1", { staticClass: "text-center title py-3 fw-bold" }, [
-        _vm._v("POSTS"),
-      ]),
       _vm._v(" "),
       _c("main", { staticClass: "container py-4" }, [_c("router-view")], 1),
     ],
@@ -41792,14 +41838,27 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: "history",
   routes: [{
-    path: "/",
+    path: "//",
     component: _pages_Home__WEBPACK_IMPORTED_MODULE_2__["default"],
-    name: "home.index"
+    name: "home.index",
+    meta: {
+      title: "Boolpress | Homepage",
+      linkTxt: "Home"
+    }
   }, {
     path: "/contacts",
     component: _pages_Contacts__WEBPACK_IMPORTED_MODULE_3__["default"],
-    name: "contacts.index"
+    name: "contacts.index",
+    meta: {
+      title: "Boolpress | Contacts",
+      linkTxt: "Contatti"
+    }
   }]
+}); // Change the page title before loading each route
+
+router.beforeEach(function (to, from, next) {
+  document.title = to.meta.title;
+  next();
 }); // Export th einstance (make it public)
 
 /* harmony default export */ __webpack_exports__["default"] = (router);
