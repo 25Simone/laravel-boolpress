@@ -49,9 +49,9 @@ class PostController extends Controller {
         return response()->json($newPost); 
     }
 
-    public function show(Post $post) {
-        // Pass the dependent functions to the show
-        $post->load("tags", "user");
+    public function show(Post $slug) {
+        $post = Post::where("slug", $slug)->with(["tags", "user", "category"])->first();
+
         // Return the post
         return response()->json($post);
     }
