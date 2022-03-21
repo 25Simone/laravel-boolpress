@@ -47,9 +47,14 @@ export default {
     },
     methods: {
         async fetchPost() {
-            const resp = await axios.get(`/api/posts/${this.$route.params.post}`);
-            console.log(resp.data);
-            this.post = resp.data;
+            try {
+                const resp = await axios.get(`/api/posts/${this.$route.params.post}`);
+                // Save the response in the post object
+                this.post = resp.data;
+            } catch(er) {
+                this.$router.replace({name: "error", params: {message: er.message}});
+                console.log(er.message);
+            }
         }
     }
 }

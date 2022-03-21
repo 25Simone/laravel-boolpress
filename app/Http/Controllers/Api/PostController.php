@@ -52,6 +52,10 @@ class PostController extends Controller {
     public function show($slug) {
         $post = Post::where("slug", $slug)->with(["tags", "user", "category"])->first();
 
+
+        if(!$post) {
+            abort(404);
+        }
         // Return the post
         return response()->json($post);
     }

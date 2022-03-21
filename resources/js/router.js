@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "./pages/Home";
 import Contacts from "./pages/Contacts";
 import Show from "./pages/posts/Show";
+import ErrorPage from "./pages/ErrorPage";
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,11 @@ const router = new VueRouter({
             component: Show,
             name:"posts.show",
             meta: {title: "Dettagli"},
+        },
+        {
+            path: "*",
+            component: ErrorPage,
+            name: "error",
         },
     ]
 });
