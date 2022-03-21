@@ -2236,6 +2236,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // Axios
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -26134,7 +26162,65 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    " + _vm._s(_vm.post.title) + "\n")])
+  return _c("div", [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "card" }, [
+            _c(
+              "div",
+              { staticClass: "card-header d-flex align-items-center" },
+              [
+                _c("div", [
+                  _vm._v("\n                        Dettagli post: "),
+                  _c("strong", [_vm._v(_vm._s(_vm.post.title))]),
+                ]),
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("div", { staticClass: "post-image" }, [
+                _vm.post.image
+                  ? _c("img", {
+                      staticClass: "img-fluid rounded",
+                      attrs: { src: _vm.post.image, alt: "post image" },
+                    })
+                  : _vm._e(),
+              ]),
+              _vm._v(" "),
+              _c("strong", [_vm._v("Content:")]),
+              _vm._v(" "),
+              _c("p", { domProps: { innerHTML: _vm._s(_vm.post.content) } }),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _c("strong", [_vm._v("Categoria: ")]),
+                  _vm._v(" "),
+                  _vm.post.category
+                    ? _c("span", [_vm._v(_vm._s(_vm.post.category.name))])
+                    : _c("span", [_vm._v("Nessuna categoria")]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("strong", [_vm._v("Tags: ")]),
+                  _vm._v(" "),
+                  _vm._l(_vm.post.tags, function (tag, i) {
+                    return _c(
+                      "span",
+                      { key: i, staticClass: "badge bg-success mx-1" },
+                      [_vm._v(" " + _vm._s(tag.name) + " ")]
+                    )
+                  }),
+                ],
+                2
+              ),
+            ]),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
