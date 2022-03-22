@@ -10,9 +10,17 @@ use Illuminate\Http\Request;
 class PostController extends Controller {
     use SlugGenerator;
 
-    public function index() {
-        // Save the posts data in a variable
-        $posts = Post::paginate(6);
+    public function index(Request $request) {
+        // Save the request filter in a variable
+        $filter = $request->input("filter");
+        
+        if ($filter) {
+            // If the filter exists filter the posts data
+            $posts = Post::where("content", "LIKE", "%$filter%")->paginate();
+        } else {
+            $posts = Post::paginate(6);
+        }
+
         // Load the user data
         $posts->load('user', 'category');
         // Return in json the posts data

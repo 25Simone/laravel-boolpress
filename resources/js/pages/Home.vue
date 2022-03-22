@@ -2,6 +2,15 @@
     <div>
         <!-- Title -->
         <h1 class="text-center title py-3 fw-bold">POSTS</h1>
+        <div class="d-flex justify-content-end">
+            <input
+            type="text"
+            class="form-input"
+            placeholder="Cosa vuoi cercare?"
+            v-model="searchedText"
+            @keydown.enter="searchPosts"
+      />
+        </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <!-- Card -->
             <the-post-card v-for="post in posts" :key="post.id" :post="post"></the-post-card>
@@ -35,13 +44,14 @@ export default {
             posts: [],
             // Pagination
             pagination: {},
+            searchedText: "",
         }
     },
     mounted() {
         this.fetchPosts();
     },
     methods: {
-        async fetchPosts(page = 1) {
+        async fetchPosts(page = 1, searchedText = null) {
             // axios.get("/api/posts").then((resp) => {
             //     this.posts = resp.data;
             // })
@@ -54,7 +64,12 @@ export default {
             };
 
             // fetch posts using async await
-            const resp = await axios.get("/api/posts?page=" + page);
+            const resp = await axios.get("/api/posts", {
+                params: {
+                    page,
+                    filter: searchedText,
+                }
+            });
             // Save the response in a variable
             this.pagination = resp.data;
             // Save only the posts data
@@ -72,6 +87,10 @@ export default {
             this.fetchPosts(page);
             console.log('getPage eseguita');
         },
+
+        searchPosts() {
+            this.fetchPosts(1, this.searchedText)
+        }
     }
 };
 </script>

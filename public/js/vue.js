@@ -2315,6 +2315,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // Axios
 
@@ -2328,7 +2337,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       posts: [],
       // Pagination
-      pagination: {}
+      pagination: {},
+      searchedText: ""
     };
   },
   mounted: function mounted() {
@@ -2340,12 +2350,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var page, resp;
+        var page, searchedText, resp;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
+                searchedText = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : null;
 
                 // axios.get("/api/posts").then((resp) => {
                 //     this.posts = resp.data;
@@ -2362,17 +2373,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 ; // fetch posts using async await
 
-                _context.next = 7;
-                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/posts?page=" + page);
+                _context.next = 8;
+                return axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/api/posts", {
+                  params: {
+                    page: page,
+                    filter: searchedText
+                  }
+                });
 
-              case 7:
+              case 8:
                 resp = _context.sent;
                 // Save the response in a variable
                 _this.pagination = resp.data; // Save only the posts data
 
                 _this.posts = resp.data.data;
 
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
@@ -2391,6 +2407,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getPage: function getPage(page) {
       this.fetchPosts(page);
       console.log('getPage eseguita');
+    },
+    searchPosts: function searchPosts() {
+      this.fetchPosts(1, this.searchedText);
     }
   }
 });
@@ -26517,6 +26536,39 @@ var render = function () {
   return _c("div", [
     _c("h1", { staticClass: "text-center title py-3 fw-bold" }, [
       _vm._v("POSTS"),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "d-flex justify-content-end" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.searchedText,
+            expression: "searchedText",
+          },
+        ],
+        staticClass: "form-input",
+        attrs: { type: "text", placeholder: "Cosa vuoi cercare?" },
+        domProps: { value: _vm.searchedText },
+        on: {
+          keydown: function ($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.searchPosts.apply(null, arguments)
+          },
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.searchedText = $event.target.value
+          },
+        },
+      }),
     ]),
     _vm._v(" "),
     _c(
