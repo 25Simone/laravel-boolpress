@@ -15,8 +15,8 @@ class CreateContactsTable extends Migration
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->string("name")->nullable(true)->default("Utente Anonimo");
-            $table->string("email")->required;
-            $table->mediumText("message")->required;
+            $table->string("email");
+            $table->mediumText("message");
             $table->timestamps();
         });
     }
