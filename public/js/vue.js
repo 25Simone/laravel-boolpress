@@ -2166,6 +2166,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 // Axios
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2174,6 +2180,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       contactSubmitted: false,
       formSubmittedError: false,
       errorMessage: null,
+      formValidationErrors: null,
       formData: {
         name: "",
         email: "",
@@ -2192,28 +2199,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _context.next = 3;
+                // Reset formValidationErrors
+                _this.formValidationErrors = null;
+                _context.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", _this.formData);
 
-              case 3:
+              case 4:
                 resp = _context.sent;
                 // Alert show
                 _this.contactSubmitted = true;
-                _context.next = 11;
+                _this.formSubmittedError = false;
+                _context.next = 14;
                 break;
 
-              case 7:
-                _context.prev = 7;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](0);
                 _this.errorMessage = _context.t0.response.data.message;
-                _this.formSubmittedError = true;
+                _this.formSubmittedError = true; // 422 is a validation error
 
-              case 11:
+                if (_context.t0.response.status === 422) {
+                  _this.formValidationErrors = _context.t0.response.data.errors;
+                }
+
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 9]]);
       }))();
     }
   }
@@ -26278,7 +26292,17 @@ var render = function () {
   return _c("div", [
     _c("h1", { staticClass: "fw-bold my-3" }, [_vm._v("Contact Us")]),
     _vm._v(" "),
-    !_vm.contactSubmitted && !_vm.formSubmittedError
+    _vm.formSubmittedError
+      ? _c("div", { staticClass: "alert alert-danger py-5" }, [
+          _c("h5", [_vm._v("Impossibile inviare il Messaggio!")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "lead" }, [
+            _vm._v("Ci dispiace,  " + _vm._s(_vm.errorMessage) + " "),
+          ]),
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    !_vm.contactSubmitted
       ? _c("div", [
           _c("div", { staticClass: "mb-3" }, [
             _c("label", { staticClass: "form-label", attrs: { for: "name" } }, [
@@ -26310,6 +26334,12 @@ var render = function () {
                 },
               },
             }),
+            _vm._v(" "),
+            _vm.formValidationErrors && _vm.formValidationErrors.name
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.formValidationErrors.name) + " "),
+                ])
+              : _vm._e(),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "mb-3" }, [
@@ -26347,6 +26377,12 @@ var render = function () {
                 },
               },
             }),
+            _vm._v(" "),
+            _vm.formValidationErrors && _vm.formValidationErrors.email
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.formValidationErrors.email) + " "),
+                ])
+              : _vm._e(),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "mb-3" }, [
@@ -26380,6 +26416,12 @@ var render = function () {
                 },
               },
             }),
+            _vm._v(" "),
+            _vm.formValidationErrors && _vm.formValidationErrors.message
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(" " + _vm._s(_vm.formValidationErrors.message) + " "),
+                ])
+              : _vm._e(),
           ]),
           _vm._v(" "),
           _c(
@@ -26402,16 +26444,6 @@ var render = function () {
             _vm._v(
               "Il suo messaggio è stato inviato correttamente, risponderemo il prima possibile."
             ),
-          ]),
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.formSubmittedError
-      ? _c("div", { staticClass: "alert alert-danger py-5" }, [
-          _c("h5", [_vm._v("Impossibile inviare il Messaggio!")]),
-          _vm._v(" "),
-          _c("p", { staticClass: "lead" }, [
-            _vm._v("Ci dispiace,  " + _vm._s(_vm.errorMessage) + " "),
           ]),
         ])
       : _vm._e(),
