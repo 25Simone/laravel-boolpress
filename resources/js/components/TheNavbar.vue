@@ -47,7 +47,7 @@ export default {
         }
     },
     mounted() {
-        //  Fills the list only with routes that contain the linkTxt in the meta
+        //  Fills the list only with routes that contain linkTxt in the meta
         this.routes = this.$router.getRoutes().filter((route) => route.meta.linkTxt);
         this.fetchUser();
     },

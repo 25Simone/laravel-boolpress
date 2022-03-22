@@ -36,7 +36,7 @@
                             {{-- PHONE --}}
                             <div class="py-3">
                                 <label>Phone</label>
-                                <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Enter the phone" value="{{ $user->infoUser ? $user->infoUser->address : '' }}">
+                                <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Enter the phone" value="{{ $user->infoUser ? $user->infoUser->phone : '' }}">
                                 @error('phone')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -44,8 +44,8 @@
 
                             {{-- ADDRESS --}}
                             <div class="py-3">
-                                <label><Address></Address></label>
-                                <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Enter the phone" value="{{ $user->infoUser ? $user->infoUser->phone : '' }}">
+                                <label>Address</label>
+                                <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Enter the address" value="{{ $user->infoUser ? $user->infoUser->address : '' }}">
                                 @error('address')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

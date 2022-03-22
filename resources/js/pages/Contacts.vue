@@ -57,7 +57,7 @@ export default {
     methods: {
         async formSubmit() {
             const resp = await axios.post("/api/contacts", this.formData);
-            console.log(resp.data);
+            console.log(resp.data); // DEBUG
         }
     }
 };

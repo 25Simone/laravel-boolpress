@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Contact;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,12 @@ class ContactController extends Controller
     public function store(Request $request) {
         // Save the form data in a variable
         $data = $request->all();
-        return $data;
+
+        // Create a new line
+        $newContact = new Contact();
+        // Fill the contact width data
+
+        // Save the line
     }
 
     /**

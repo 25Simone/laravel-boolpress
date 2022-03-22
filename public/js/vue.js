@@ -1970,7 +1970,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    //  Fills the list only with routes that contain the linkTxt in the meta
+    //  Fills the list only with routes that contain linkTxt in the meta
     this.routes = this.$router.getRoutes().filter(function (route) {
       return route.meta.linkTxt;
     });
@@ -2183,7 +2183,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 resp = _context.sent;
-                console.log(resp.data);
+                console.log(resp.data); // DEBUG
 
               case 4:
               case "end":
