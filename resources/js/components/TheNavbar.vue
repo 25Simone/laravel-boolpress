@@ -22,10 +22,13 @@
                         <router-link class="nav-link" :to="route.path" > {{ route.meta.linkTxt }} </router-link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login"> Login </a>
+                        <a class="nav-link" href="/login" v-if="!user"> Login </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register"> Register </a>
+                        <a class="nav-link" href="/register" v-if="!user"> Register </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin" v-if="user"> {{ user.name }} </a>
                     </li>
                 </ul>
             </div>
@@ -34,15 +37,34 @@
 </template>
 
 <script>
+// Axios
+import axios from "axios";
 export default {
     data() {
         return {
-           routes: [], 
+           routes: [],
+           user: null, 
         }
     },
     mounted() {
         //  Fills the list only with routes that contain the linkTxt in the meta
         this.routes = this.$router.getRoutes().filter((route) => route.meta.linkTxt);
+        this.fetchUser();
+    },
+    methods: {
+        fetchUser() {
+            axios.get("/api/user").then(resp=> {
+                console.log(resp.data); // DEBUG
+                this.user = resp.data;
+                // Save the user data in loacalStorage
+                localStorage.setItem("user", JSON.stringify(resp.data));
+            })
+            .catch((er) => {
+                console.error("Utente non loggato"); // DEBUG
+                // Remove the user data in the localStorage
+                localStorage.removeItem("user");
+            });
+        }
     }
 }
 </script>

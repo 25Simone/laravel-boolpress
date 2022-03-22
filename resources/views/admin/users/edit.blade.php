@@ -36,7 +36,7 @@
                             {{-- PHONE --}}
                             <div class="py-3">
                                 <label>Phone</label>
-                                <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Enter the phone" value="{{ $user->infoUser->phone }}">
+                                <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Enter the phone" value="{{ $user->infoUser ? $user->infoUser->address : '' }}">
                                 @error('phone')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -45,7 +45,7 @@
                             {{-- ADDRESS --}}
                             <div class="py-3">
                                 <label><Address></Address></label>
-                                <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Enter the phone" value="{{ $user->infoUser->address }}">
+                                <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Enter the phone" value="{{ $user->infoUser ? $user->infoUser->phone : '' }}">
                                 @error('address')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -54,7 +54,7 @@
                             {{-- AVATAR --}}
                             <div class="py-3">
                                 <label>Avatar image</label>
-                                <input type="url" name="avatar" class="form-control @error('avatar') is-invalid @enderror" placeholder="Enter the url" value="{{ $user->infoUser->avatar ? $user->infoUser->avatar : '' }}">
+                                <input type="url" name="avatar" class="form-control @error('avatar') is-invalid @enderror" placeholder="Enter the url" value="{{ $user->infoUser ? $user->infoUser->avatar : '' }}">
                                 @error('avatar')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

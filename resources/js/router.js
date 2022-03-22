@@ -20,7 +20,7 @@ const router = new VueRouter({
             path: "/contacts",
             component: Contacts,
             name:"contacts.index",
-            meta: {title: "Boolpress | Contacts", linkTxt: "Contatti",},
+            meta: {title: "Boolpress | Contacts", linkTxt: "Contact Us",},
         },
         {
             path: "/posts/:post",
@@ -29,7 +29,8 @@ const router = new VueRouter({
             meta: {title: "Dettagli"},
         },
         {
-            path: "*",
+            path: "/not-found",
+            alias: "*",
             component: ErrorPage,
             name: "error",
         },

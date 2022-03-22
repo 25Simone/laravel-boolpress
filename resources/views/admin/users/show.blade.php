@@ -18,9 +18,9 @@
                         @endif
                     </div>
                     <div>
+                        <strong>Email: </strong>{{ $user->email }}
+                        <br />
                         @if($user->infoUser)
-                            <strong>Email: </strong>{{ $user->email }}
-                            <br />
                             <strong>Phone: </strong>{{ $user->infoUser->phone }}
                             <br />
                             <strong>Address: </strong>{{ $user->infoUser->address }}
