@@ -44,6 +44,17 @@
                 ></textarea>
                 <span class="text-danger" v-if="formValidationErrors && formValidationErrors.message"> {{formValidationErrors.message}} </span>
             </div>
+            <!-- Attachment -->
+            <div class="mb-3">
+                <label for="attachmentInput" class="form-label">Allegato</label>
+                <input
+                    type="file"
+                    class="form-control"
+                    id="attachmentInput"
+                    @change="onAttachmentChange"
+                />
+                <span class="text-danger" v-if="formValidationErrors && formValidationErrors.attachment"> {{formValidationErrors.attachment}} </span>
+            </div>
             <!-- Button submit-->
             <button @click="formSubmit" type="submit" class="btn btn-success">Invia</button>
         </div>
@@ -71,6 +82,7 @@ export default {
                 name: "",
                 email: "",
                 message: "",
+                attachment: null,
             }
         }
     },
@@ -80,7 +92,16 @@ export default {
                 // Reset formValidationErrors
                 this.formValidationErrors = null;
 
-                const resp = await axios.post("/api/contacts", this.formData);
+                // Create an instance of FormData class
+                const formDataInstance = new FormData();
+                // Pass manually the keys and the values to the instance
+                formDataInstance.append("name", this.formData.name);
+                formDataInstance.append("email", this.formData.email);
+                formDataInstance.append("message", this.formData.message);
+                formDataInstance.append("attachment", this.formData.attachment);
+
+                // Axios post
+                const resp = await axios.post("/api/contacts", formDataInstance);
 
                 // Alert show
                 this.contactSubmitted = true;
@@ -94,6 +115,10 @@ export default {
                 }
             }
 
+        },
+        onAttachmentChange(event) {
+            // Save in the form data the attachment file
+            this.formData.attachment = event.target.files[0];
         }
     },
 };

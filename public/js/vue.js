@@ -2176,6 +2176,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // Axios
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2188,7 +2199,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       formData: {
         name: "",
         email: "",
-        message: ""
+        message: "",
+        attachment: null
       }
     };
   },
@@ -2197,27 +2209,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var resp;
+        var formDataInstance, resp;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
                 // Reset formValidationErrors
-                _this.formValidationErrors = null;
-                _context.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", _this.formData);
+                _this.formValidationErrors = null; // Create an instance of FormData class
 
-              case 4:
+                formDataInstance = new FormData(); // Pass manually the keys and the values to the instance
+
+                formDataInstance.append("name", _this.formData.name);
+                formDataInstance.append("email", _this.formData.email);
+                formDataInstance.append("message", _this.formData.message);
+                formDataInstance.append("attachment", _this.formData.attachment); // Axios post
+
+                _context.next = 9;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", formDataInstance);
+
+              case 9:
                 resp = _context.sent;
                 // Alert show
                 _this.contactSubmitted = true;
                 _this.formSubmittedError = false;
-                _context.next = 14;
+                _context.next = 19;
                 break;
 
-              case 9:
-                _context.prev = 9;
+              case 14:
+                _context.prev = 14;
                 _context.t0 = _context["catch"](0);
                 _this.errorMessage = _context.t0.response.data.message;
                 _this.formSubmittedError = true; // 422 is a validation error
@@ -2226,13 +2246,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.formValidationErrors = _context.t0.response.data.errors;
                 }
 
-              case 14:
+              case 19:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 9]]);
+        }, _callee, null, [[0, 14]]);
       }))();
+    },
+    onAttachmentChange: function onAttachmentChange(event) {
+      // Save in the form data the attachment file
+      this.formData.attachment = event.target.files[0];
     }
   }
 });
@@ -26552,6 +26576,28 @@ var render = function () {
             _vm.formValidationErrors && _vm.formValidationErrors.message
               ? _c("span", { staticClass: "text-danger" }, [
                   _vm._v(" " + _vm._s(_vm.formValidationErrors.message) + " "),
+                ])
+              : _vm._e(),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-3" }, [
+            _c(
+              "label",
+              { staticClass: "form-label", attrs: { for: "attachmentInput" } },
+              [_vm._v("Allegato")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "file", id: "attachmentInput" },
+              on: { change: _vm.onAttachmentChange },
+            }),
+            _vm._v(" "),
+            _vm.formValidationErrors && _vm.formValidationErrors.attachment
+              ? _c("span", { staticClass: "text-danger" }, [
+                  _vm._v(
+                    " " + _vm._s(_vm.formValidationErrors.attachment) + " "
+                  ),
                 ])
               : _vm._e(),
           ]),
