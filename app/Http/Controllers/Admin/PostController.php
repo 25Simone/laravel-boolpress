@@ -122,45 +122,42 @@ class PostController extends Controller {
         $data = $request->validate(
             // Validation rules
             [
-                "title" => "required|min:5",
-                "content" => "required|min:20",
-                "image" => "nullable|max:1000",
-                "imageLink" => "nullable|url",
-                "category_id" => "nullable|exists:categories,id",
-                "tags" => "nullable|exists:tags,id",
-                ]
-            );
+            "title" => "required|min:5",
+            "content" => "required|min:20",
+            "image" => "nullable|max:1000",
+            "imageLink" => "nullable|url",
+            "category_id" => "nullable|exists:categories,id",
+            "tags" => "nullable|exists:tags,id",
+        ]);
             
             
-            if ($data["title"] !== $post->title) {
-                $data["slug"] = $this->getUniqueSlug($data["title"]);  
-            }
-            
-            // Update the post
-            $post->update($data);
+        if ($data["title"] !== $post->title) {
+            $data["slug"] = $this->getUniqueSlug($data["title"]);  
+        }
+          
+        // Update the post
+        $post->update($data);
 
-            if (key_exists("image", $data)) {
-                if ($post->image || key_exists("imageLink", $data)) {
-                    Storage::delete($post->image);
-                }
-
-                $post->image = Storage::put("postImages", $data["image"]);
-                $post->save();
+        if (key_exists("image", $data)) {
+            // If a value for the image or imageLink column already exists in the db, delete the old image
+            if ($post->image || key_exists("imageLink", $data)) {
+                Storage::delete($post->image);
             }
-        
+            $post->image = Storage::put("postImages", $data["image"]);
+            $post->save();
+        }
+
         if (key_exists('tags', $data)) {
             // Update the pivot table post_tag
             // Invokes the tags function (in the post's model)
             // For the current post remove all the existing relations with the tags
             $post->tags()->detach();
-
             // For the current post adds the relations with the tags taken from the form
             $post->tags()->attach($data["tags"]);
         } else {
             $post->tags()->detach();
         }
-
-        return redirect()->route("admin.posts.show", $post->slug);
+       return redirect()->route("admin.posts.show", $post->slug);
     }
 
     /**
