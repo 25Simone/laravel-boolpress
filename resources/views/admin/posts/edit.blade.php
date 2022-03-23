@@ -45,7 +45,7 @@
                             {{-- IMAGE LINK --}}
                             <div class="py-3">
                                 <label>Image Link</label>
-                                <input type="url" name="imageLink" class="form-control @error('imageLink') is-invalid @enderror" placeholder="Enter the url" value="{{ $post->image }}">
+                                <input type="url" name="imageLink" class="form-control @error('imageLink') is-invalid @enderror" placeholder="Enter the url" value="{{ $post->imageLink }}">
                                 @error('imageLink')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

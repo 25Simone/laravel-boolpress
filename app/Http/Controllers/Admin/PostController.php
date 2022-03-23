@@ -54,7 +54,8 @@ class PostController extends Controller {
             [
                 "title" => "required|min:5",
                 "content" => "required|min:20",
-                "image" => "nullable|url",
+                "image" => "nullable|max:1000",
+                "imageLink" => "nullable|url",
                 "category_id" => "nullable",
                 "tags" => "nullable"
             ]
@@ -67,6 +68,11 @@ class PostController extends Controller {
         $newPost->slug = $this->getUniqueSlug($newPost->title);
         // Define the user_id value as the id of the logged in user
         $newPost->user_id = Auth::user()->id;
+
+        // If image key exists in data equals it to newPost->image
+        if (key_exists("image", $data)) {
+            $newPost->image = Storage::put("postImages", $data["image"]);
+        }
 
         // Save the line
         $newPost->save();
