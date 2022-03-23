@@ -2079,9 +2079,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getPostImage: function getPostImage(post) {
-      var _post$imageLink;
-
-      return (_post$imageLink = post.imageLink) !== null && _post$imageLink !== void 0 ? _post$imageLink : 'http://www.asdalcione.it/wp-content/uploads/2016/08/jk-placeholder-image-1.jpg';
+      if (post.image) {
+        return post.image;
+      } else if (post.imageLink) {
+        return post.imageLink;
+      } else {
+        return 'http://www.asdalcione.it/wp-content/uploads/2016/08/jk-placeholder-image-1.jpg';
+      }
     },
     getCreationDate: function getCreationDate(post) {
       if (moment__WEBPACK_IMPORTED_MODULE_0___default()().diff(post.created_at, 'hours') >= 12) {

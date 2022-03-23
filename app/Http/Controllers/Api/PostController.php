@@ -23,6 +23,14 @@ class PostController extends Controller {
 
         // Load the user data
         $posts->load('user', 'category');
+
+        // Define the image path foreach post
+        $posts->each(function($post) {
+            if($post->image) {
+                $post->image = asset("storage/" . $post->image);
+            }
+        });
+
         // Return in json the posts data
         return response()->json($posts);
     }

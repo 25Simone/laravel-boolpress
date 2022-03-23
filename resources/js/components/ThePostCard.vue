@@ -32,7 +32,13 @@ export default {
     },
     methods: {
         getPostImage(post) {
-            return post.imageLink ?? 'http://www.asdalcione.it/wp-content/uploads/2016/08/jk-placeholder-image-1.jpg';
+            if(post.image) {
+                return post.image;
+            } else if(post.imageLink) {
+                return post.imageLink;
+            } else {
+                return 'http://www.asdalcione.it/wp-content/uploads/2016/08/jk-placeholder-image-1.jpg';
+            }
         },
         getCreationDate(post) {
             if(moment().diff(post.created_at, 'hours') >= 12){
