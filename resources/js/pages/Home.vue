@@ -2,13 +2,14 @@
     <div>
         <!-- Title -->
         <h1 class="text-center title py-3 fw-bold">POSTS</h1>
+        <!-- Searchbar -->
         <div class="d-flex justify-content-end">
             <input
             type="text"
-            class="form-input"
+            class="form-input m-3 searchbar"
             placeholder="Cosa vuoi cercare?"
             v-model="searchedText"
-            @keydown.enter="searchPosts"
+            @keyup="searchPosts"
       />
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -22,6 +23,7 @@
             @nextPage="nextPage"
             @getPage="getPage"
             :pagination="pagination"
+            v-if="!searchedText"
             >
             </the-pagination-controller>
         </div>
@@ -44,7 +46,7 @@ export default {
             posts: [],
             // Pagination
             pagination: {},
-            searchedText: "",
+            searchedText: null,
         }
     },
     mounted() {
@@ -96,5 +98,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.searchbar{
+    background-color: #222;
+    color: #fff;
+    border-radius: 15px;
+    padding: 5px 8px;
+    width: 20%;
+}
 </style>

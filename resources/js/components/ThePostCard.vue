@@ -32,7 +32,7 @@ export default {
     },
     methods: {
         getPostImage(post) {
-            return post.image ?? 'http://www.asdalcione.it/wp-content/uploads/2016/08/jk-placeholder-image-1.jpg';
+            return post.imageLink ?? 'http://www.asdalcione.it/wp-content/uploads/2016/08/jk-placeholder-image-1.jpg';
         },
         getCreationDate(post) {
             if(moment().diff(post.created_at, 'hours') >= 12){

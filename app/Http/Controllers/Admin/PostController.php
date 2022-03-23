@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller {
     use SlugGenerator;
@@ -123,7 +124,8 @@ class PostController extends Controller {
             [
                 "title" => "required|min:5",
                 "content" => "required|min:20",
-                "image" => "nullable|url",
+                "image" => "nullable|max:1000",
+                "imageLink" => "nullable|url",
                 "category_id" => "nullable|exists:categories,id",
                 "tags" => "nullable|exists:tags,id",
                 ]
@@ -134,10 +136,17 @@ class PostController extends Controller {
                 $data["slug"] = $this->getUniqueSlug($data["title"]);  
             }
             
-            // dd($post);
             // Update the post
             $post->update($data);
-            
+
+            if (key_exists("image", $data)) {
+                if ($post->image || key_exists("imageLink", $data)) {
+                    Storage::delete($post->image);
+                }
+
+                $post->image = Storage::put("postImages", $data["image"]);
+                $post->save();
+            }
         
         if (key_exists('tags', $data)) {
             // Update the pivot table post_tag

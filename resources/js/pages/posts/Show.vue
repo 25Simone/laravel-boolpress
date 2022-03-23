@@ -22,7 +22,7 @@
                             <span v-else>Nessuna categoria</span>
                             <br />
                             <strong>Tags: </strong>
-                            <span v-for="(tag, i) in post.tags" :key="i" class="badge bg-success mx-1"> {{tag.name}} </span>             
+                            <span v-for="(tag, i) in post.tags" :key="i" class="badge bg-success mx-1"> {{tag.name}} </span>        
                         </div>
                     </div>
                 </div>
@@ -61,5 +61,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.post-image{
+    img{
+        width: 100%;
+    }
+}
 
 </style>

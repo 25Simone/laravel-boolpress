@@ -10,11 +10,14 @@
                             Dettagli post: <strong>{{ $post->title }}</strong>
                         </div>
                     </div>
+                    
           
                     <div class="card-body">
                         <div class="post-image">
                             @if(isset($post->image))
-                                <img class="img-fluid rounded" src="{{ $post->image }}" alt="post image">
+                                <img class="img-fluid rounded" src="{{asset("storage/" . $post->image)}}" alt="post image">
+                            @elseif($post->imageLink)
+                                <img class="img-fluid rounded" src="{{ $post->imageLink }}" alt="post image">
                             @endif
                         </div>
                         <strong>Content:</strong>

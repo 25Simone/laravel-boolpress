@@ -11,7 +11,7 @@
                     {{-- CARD BODY --}}
                     <div class="card-body">
                         {{-- FORM --}}
-                        <form action="{{ route('admin.posts.update', $post->id) }}" method="post">
+                        <form action="{{ route('admin.posts.update', $post->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('put')
 
@@ -33,11 +33,20 @@
                                 @enderror
                             </div>
 
-                            {{-- IMAGE --}}
+                            {{-- UPLOAD IMAGE --}}
                             <div class="py-3">
                                 <label>Image</label>
-                                <input type="url" name="image" class="form-control @error('image') is-invalid @enderror" placeholder="Enter the url" value="{{ $post->image }}">
+                                <input type="file" name="image" class="form-control @error('image') is-invalid @enderror">
                                 @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            {{-- IMAGE LINK --}}
+                            <div class="py-3">
+                                <label>Image Link</label>
+                                <input type="url" name="imageLink" class="form-control @error('imageLink') is-invalid @enderror" placeholder="Enter the url" value="{{ $post->image }}">
+                                @error('imageLink')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
