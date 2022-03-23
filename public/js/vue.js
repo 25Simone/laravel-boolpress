@@ -2527,6 +2527,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee, null, [[0, 7]]);
       }))();
+    },
+    getPostImage: function getPostImage(post) {
+      if (post.image) {
+        return post.image;
+      } else if (post.imageLink) {
+        return post.imageLink;
+      } else {
+        return 'http://www.asdalcione.it/wp-content/uploads/2016/08/jk-placeholder-image-1.jpg';
+      }
     }
   }
 });
@@ -26735,12 +26744,10 @@ var render = function () {
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "post-image" }, [
-                _vm.post.image
-                  ? _c("img", {
-                      staticClass: "img-fluid rounded",
-                      attrs: { src: _vm.post.image, alt: "post image" },
-                    })
-                  : _vm._e(),
+                _c("img", {
+                  staticClass: "img-fluid rounded",
+                  attrs: { src: _vm.getPostImage(_vm.post), alt: "post image" },
+                }),
               ]),
               _vm._v(" "),
               _c("strong", [_vm._v("Content:")]),

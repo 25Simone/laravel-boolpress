@@ -68,6 +68,10 @@ class PostController extends Controller {
     public function show($slug) {
         $post = Post::where("slug", $slug)->with(["tags", "user", "category"])->first();
 
+        // Define the image path the post
+        if($post->image) {
+            $post->image = asset("storage/" . $post->image);
+        }
 
         if(!$post) {
             abort(404);

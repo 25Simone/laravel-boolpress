@@ -12,7 +12,7 @@
           
                     <div class="card-body">
                         <div class="post-image">
-                            <img v-if="post.image" class="img-fluid rounded" :src="post.image" alt="post image">
+                            <img class="img-fluid rounded" :src="getPostImage(post)" alt="post image">
                         </div>
                         <strong>Content:</strong>
                         <p v-html="post.content"></p>
@@ -55,7 +55,16 @@ export default {
                 this.$router.replace({name: "error", params: {message: er.message}});
                 console.log(er.message);
             }
-        }
+        },
+        getPostImage(post) {
+            if(post.image) {
+                return post.image;
+            } else if(post.imageLink) {
+                return post.imageLink;
+            } else {
+                return 'http://www.asdalcione.it/wp-content/uploads/2016/08/jk-placeholder-image-1.jpg';
+            }
+        },
     }
 }
 </script>
