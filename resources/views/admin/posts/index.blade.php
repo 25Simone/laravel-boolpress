@@ -15,7 +15,7 @@
                             <div>{{$post->title}}</div>
                             <div class="d-flex fs-6">
                                 <a class="nav-link" href="{{ route('admin.posts.edit', $post->id) }}" title="edit"><i class="fas fa-edit"></i></a>
-                                <a class="nav-link" href="{{ route('admin.posts.show', $post->slug) }}" title="details"><i class="fas fa-eye"></i></a>
+                                <a class="nav-link" href="{{ route('admin.posts.show', $post->slug) }}" title="details"><i class="fas fa-eye"></i></a> 
                             </div>
                         </div>
                         {{-- CARD BODY --}}

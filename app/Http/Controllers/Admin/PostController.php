@@ -99,7 +99,7 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($slug) {
-        $post = Post::where("slug", $slug)->first();
+        $post = Post::where("slug", $slug)->withTrashed()->first();
 
         return view("admin.posts.show", compact("post"));
     }
@@ -179,7 +179,9 @@ class PostController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post) {
+    public function destroy($id) {
+        $post = Post::withTrashed()->findOrFail($id);
+
         $post->tags()->detach();
 
         if ($post->image) {
@@ -191,7 +193,8 @@ class PostController extends Controller {
         return redirect()->route('admin.posts.index');
     }
 
-    public function archive(Post $post) {
+    public function archive($id) {
+        $post = Post::withTrashed()->findOrFail($id);
         // Run the soft delete
         $post->delete();
 
