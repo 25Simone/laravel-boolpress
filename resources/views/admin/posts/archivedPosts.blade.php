@@ -3,8 +3,10 @@
 @section('content')
 
     <div class="container">
-        <div class="row justify-content-center">
-            <h1 class="text-center text-warning fw-bold">Post archiviati</h1>
+        <div class="row justify-content-center m-3">
+            <div class="text-center">
+                <span class="fw-bold bg-warning rounded p-2 fw-bold fs-3">Post archiviati</span>
+            </div>
             <div class="col-md-8">
                 @foreach ($posts as $post)  
                     <div class="card my-3">

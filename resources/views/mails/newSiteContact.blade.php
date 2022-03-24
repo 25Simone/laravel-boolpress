@@ -13,7 +13,9 @@
         <li><strong>User name: </strong>{{ $newContactInfo->name }}</li>
         <li><strong>User email: </strong>{{ $newContactInfo->email }}</li>
         <li><strong>Message: </strong>{{ $newContactInfo->message }}</li>
-        <li><strong>Attachment: </strong><a href="{{ asset('storage/' . $newContactInfo->attachment) }}">Attachment</a></li>
+        @if($newContactInfo->attachment)
+            <li><strong>Attachment: </strong><a href="{{ asset('storage/' . $newContactInfo->attachment) }}">Attachment</a></li>
+        @endif
     </ul>
 </body>
 </html>
