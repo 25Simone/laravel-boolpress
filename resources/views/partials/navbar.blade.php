@@ -32,6 +32,9 @@
                     <li class="nav-item">
                         <a href="{{ route('admin.posts.index') }}" class="nav-link" role="buton">Posts</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.posts.archivedPosts') }}" class="nav-link" role="buton">Archived Posts</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}

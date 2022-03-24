@@ -27,6 +27,13 @@ class PostController extends Controller {
         return view("admin.posts.index", compact('posts'));
     }
 
+    public function archivedPosts() {
+        // Save the db data in a variable
+        $posts = Post::where('user_id', Auth::user()->id)->onlyTrashed()->get();
+        // Return the index view
+        return view("admin.posts.archivedPosts", compact('posts'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -179,8 +186,16 @@ class PostController extends Controller {
             Storage::delete($post->image);
         }
 
-        $post->delete();
+        $post->forceDelete();
 
         return redirect()->route('admin.posts.index');
     }
+
+    public function archive(Post $post) {
+        // Run the soft delete
+        $post->delete();
+
+        return redirect()->route('admin.posts.archivedPosts');
+    }
+
 }

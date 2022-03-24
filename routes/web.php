@@ -25,6 +25,8 @@ Route::middleware('auth')
     ->name('admin.')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
+        Route::get("posts/archivedPosts", "PostController@archivedPosts")->name('posts.archivedPosts');
+        Route::get("posts/archive", "PostController@archive")->name('posts.archive');
         Route::resource("posts", "PostController");
         Route::resource("users", "UserController");
     });

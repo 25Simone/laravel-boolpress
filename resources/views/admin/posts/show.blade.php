@@ -47,7 +47,10 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center p-3">
-                        <a class="btn btn-outline-secondary mx-2" href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>
+                        @if(!$post->trashed())
+                            <a class="btn btn-warning mx-2" href="{{ route('admin.posts.archive', $post->id) }}">Archivia</a>    
+                            <a class="btn btn-outline-secondary mx-2" href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>    
+                        @endif
                         @include('partials.deleteButton', [
                             "route"=>"admin.posts.destroy",
                             "id"=>$post->id,
