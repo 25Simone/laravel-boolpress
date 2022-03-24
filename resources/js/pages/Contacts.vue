@@ -98,7 +98,9 @@ export default {
                 formDataInstance.append("name", this.formData.name);
                 formDataInstance.append("email", this.formData.email);
                 formDataInstance.append("message", this.formData.message);
-                formDataInstance.append("attachment", this.formData.attachment);
+                if (this.formData.attachment) {
+                    formDataInstance.append("attachment", this.formData.attachment);
+                }
 
                 // Axios post
                 const resp = await axios.post("/api/contacts", formDataInstance);
