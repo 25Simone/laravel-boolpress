@@ -27,6 +27,7 @@ Route::middleware('auth')
         Route::get('/', 'HomeController@index')->name('home');
         Route::get("posts/archivedPosts", "PostController@archivedPosts")->name('posts.archivedPosts');
         Route::delete("posts/{post}/archive", "PostController@archive")->name('posts.archive');
+        Route::post("posts/{post}/restore", "PostController@restore")->name('posts.restore');
         Route::resource("posts", "PostController");
         Route::resource("users", "UserController");
     });

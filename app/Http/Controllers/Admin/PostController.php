@@ -201,4 +201,15 @@ class PostController extends Controller {
         return redirect()->route('admin.posts.archivedPosts');
     }
 
+    public function restore($id) {
+        $post = Post::onlyTrashed()->findOrFail($id);
+        
+        // Forces the deleted_at column in posts table = null
+        $post->deleted_at = null;
+        // Save the changes
+        $post->save();
+        // dd($post->deleted_at); //DEBUG
+        return redirect()->route('admin.posts.index');
+    }
+
 }

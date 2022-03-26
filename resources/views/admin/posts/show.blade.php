@@ -52,8 +52,14 @@
                                 "route"=>"admin.posts.archive",
                                 "id"=>$post->id,
                             ])   
-                            <a class="btn btn-outline-secondary mx-2" href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>    
+                            <a class="btn btn-outline-secondary mx-2" href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>
+                        @else    
+                            @include('partials.restoreButton', [
+                                "route"=>"admin.posts.restore",
+                                "id"=>$post->id,
+                            ])
                         @endif
+
                         @include('partials.deleteButton', [
                             "route"=>"admin.posts.destroy",
                             "id"=>$post->id,
